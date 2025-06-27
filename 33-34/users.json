@@ -1,0 +1,9 @@
+{
+    "name": "Ivan",
+    "age": 30,
+    "is_student": false,
+    "skills": [
+        "математика",
+        "sql"
+    ]
+}
