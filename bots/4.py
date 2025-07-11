@@ -1,4 +1,6 @@
-a = ['bob', 'alisa']
+b = 0
 
-for name in a:
-    print(name)
+for i in range(10):
+    b += 1
+
+print(b)
