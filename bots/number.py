@@ -3,7 +3,7 @@ import random
 import json
 import time
 
-TOKEN = ''
+TOKEN = '7787720175:AAG4ofQwvV9MAS2W7C_hh3VEHsVMSdb3ME8'
 get_updates = f'https://api.telegram.org/bot{TOKEN}/getUpdates'
 
 keyboard = {"keyboard":[[{"text": "давай"}]], 'resize_keyboard': True}
