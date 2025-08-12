@@ -4,7 +4,7 @@ import json
 import time
 from pprint import  pprint
 
-TOKEN = ''
+TOKEN = '7787720175:AAG4ofQwvV9MAS2W7C_hh3VEHsVMSdb3ME8'
 get_updates = f'https://api.telegram.org/bot{TOKEN}/getUpdates'
 
 keyboard = {"keyboard": [[{"text": "Добавить дело"}], [{"text": "Посмотреть дела"}]], 'resize_keyboard': True}
@@ -56,7 +56,7 @@ while True:
                 else:
                     # добавляем дело поьлзователя
                     tasks.append(text)
-                    print(tasks)
+                    # print(tasks)
                     send_message_keyboad(chat_id, 'Дело добавлено!')
             # обрабокта кликов по инлайн кнопкам
             elif message.get('callback_query'):
@@ -65,6 +65,10 @@ while True:
 
                 if callback_data == 'add_task':
                     send_message(chat_id, 'Введите текст дела')
+
+                elif callback_data == 'show_tasks':
+                    for task in tasks:
+                        send_message(chat_id, task)
 
 
             last_message_id = message_id
