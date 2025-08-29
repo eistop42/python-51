@@ -6,15 +6,21 @@ class Shop:
         self.products = [{'name': 'Хлеб', 'price': 50, 'count': 2},
                          {'name': 'Молоко', 'price': 60, 'count': 1}]
 
-    def buy(self, product_name, shop):
+    def buy(self, product_name, user):
         # ищем продукт по имнеи
+        print(f'В магазине: {user.name}')
         for product in self.products:
             if product['name'] == product_name:
                 if product['count'] > 0:
-                    print(f'Купили: {product_name} ')
-                    self.all_sum += product['price']
-                    self.count_products += 1
-                    product['count'] -= 1
+                    print(f'Попытка купить {product['name']}')
+                    if user.balance >= product['price']:
+                        self.all_sum += product['price']
+                        self.count_products += 1
+                        user.balance -= product['price']
+                        product['count'] -= 1
+                        print(f'Купили: {product_name} Баланс {user.balance}')
+                    else:
+                        print('Не хватает денег')
                 else:
                     print('товар закончился...')
                 break
@@ -36,9 +42,10 @@ class User:
         self.balance = balance
 
 
+
+user1 = User('Иван', 100)
+user2 = User('Алиса', 80)
 shop = Shop()
-shop.buy('Молоко')
-shop.buy('Молоко')
-shop.add_products('Сок', 200, 2)
-shop.buy('Сок')
-shop.get_info()
+shop.buy('Хлеб', user1)
+shop.buy('Хлеб', user1)
+shop.buy('Хлеб', user1)
