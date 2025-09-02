@@ -67,7 +67,7 @@ class BasicView(AbstractView):
             print(task)
 
 class ToDo:
-    def __init__(self, db: DB, view: RichView):
+    def __init__(self, db: DB, view: AbstractView):
         self.db = db
         self.view = view
 
