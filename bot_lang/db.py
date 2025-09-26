@@ -21,6 +21,7 @@ class TelegramDB:
     def get_value(self, telegram_id, name):
         """Возвращаем значение по ключу"""
         data = self._get_data()
+        telegram_id = str(telegram_id)
         if telegram_id not in data:
             return None
         if name not in data[telegram_id]:
