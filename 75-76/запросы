@@ -1,0 +1,12 @@
+/*Показать пользователей и email, а также названия товаров, которые они купили.*/
+select Users.FirstName, Users.LastName, Users.Email, ProductName from Purchases join Users 
+on Purchases.UserID = Users.UserID
+join Products 
+on Purchases.ProductID = Products.ProductID;
+
+/* Вывести все покупки, где товар стоит дороже 20000, с именами пользователей.*/
+select Users.FirstName, Users.LastName, Users.Email, ProductName, ProductPrice from Purchases join Users 
+on Purchases.UserID = Users.UserID
+join Products 
+on Purchases.ProductID = Products.ProductID
+where ProductPrice > 20000
