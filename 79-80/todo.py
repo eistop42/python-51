@@ -1,31 +1,35 @@
-import sqlite3
+from db import DB
 
-def get_user(name):
-    with sqlite3.connect('db') as conn:
-        cur = conn.cursor()
-        cur.execute('select * from users where name = ?', (name, ))
-        res = cur.fetchone()
-        return res
+db = DB('db')
 
-def add_task(task_name, user_id):
-    with sqlite3.connect('db') as conn:
-        cur = conn.cursor()
-        cur.execute('insert into tasks (name, user_id) values (?, ?)', (task_name, user_id))
-        conn.commit()
-
-
+# спрашиваем имя и авторизуемся
 name = input('Введи имя: ')
-user = get_user(name)
+user = db.get_user(name)
+
+# регистарция + авторизация
+if not user:
+    print('Нужна регстрация')
+    action = input('Добавить тебя в базу? 1 - да, 2 - нет')
+    if action == '1':
+        db.add_user(name)
+        user = db.get_user(name)
+    else:
+        print('пока 😉')
+
 if user:
-    print(f'Привет {user[1]} Начинаем работу')
+    user = dict(user)
+    print(f'Привет {user['name']} Начинаем работу')
     while True:
         print('Выбери действие: ')
         print('1 - добавить задачу')
+        print('2 - посмотреть задачи')
         action = input('выбирай: ')
         if action == '1':
             name = input('Название задачи')
-            add_task(name, user[0])
+            db.add_task(name, user['id'])
             print('Задача добавлена')
-else:
-    print('нужна регистрация')
-# сходить в базу и проверить, есть ли такой пользователь
+        if action == '2':
+            tasks = db.get_tasks(user['id'])
+            for task in tasks:
+                task = dict(task)
+                print(task['name'])
